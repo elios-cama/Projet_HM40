@@ -1,11 +1,13 @@
  import 'package:flutter/material.dart';
+import 'package:miniprojethm40/constants.dart';
 
 AppBar AppBarHome() {
     return AppBar(
+      elevation: 0,
       centerTitle: true,
       leading: Icon(
-        Icons.menu,
-        color: Colors.red.shade300,
+        Icons.nightlight,
+        color: primaryRedColor,
       ),
       title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -13,14 +15,14 @@ AppBar AppBarHome() {
           children: [
             Icon(
               Icons.soup_kitchen_outlined,
-              color: Colors.red.shade300,
+              color: primaryRedColor,
             ),
             SizedBox(
               width: 10,
             ),
             Text(
-              "CUCINA",
-              style: TextStyle(color: Colors.red.shade300),
+              "CUISINOMAX",
+              style: TextStyle(color: primaryRedColor),
             )
           ]),
       actions: [
@@ -28,7 +30,7 @@ AppBar AppBarHome() {
           padding: const EdgeInsets.only(right: 5),
           child: Icon(
             Icons.person,
-            color: Colors.red.shade300,
+            color: primaryRedColor,
           ),
         )
       ],
