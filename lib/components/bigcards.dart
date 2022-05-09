@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:miniprojethm40/constants.dart';
+import 'package:miniprojethm40/screens/detailRecipe_screen.dart';
 
 class RecommandBigCard extends StatelessWidget {
   final String image, title, note, avis;
@@ -26,19 +27,22 @@ class RecommandBigCard extends StatelessWidget {
       width: size.width * 0.5,
 
       //height: size.height * 0.1,
-      child: Column(
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
+      child: GestureDetector(
+         onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder:(context) => DetailRecipeScreen() ));
+          },
+        child: Column(
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+              child: Image.asset(
+                image,
+              ),
             ),
-            child: Image.asset(
-              image,
-            ),
-          ),
-          GestureDetector(
-            child: Container(
+            Container(
               padding: EdgeInsets.all(kDefaultPadding / 2),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -81,9 +85,9 @@ class RecommandBigCard extends StatelessWidget {
                   )
                 ],
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

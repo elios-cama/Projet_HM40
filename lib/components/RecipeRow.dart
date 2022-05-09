@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:miniprojethm40/screens/detailRecipe_screen.dart';
 
 import '../../../constants.dart';
 
@@ -124,19 +125,22 @@ class Recomendrecipe extends StatelessWidget {
       width: size.width * 0.4,
 
       //height: size.height * 0.1,
-      child: Column(
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
+      child: GestureDetector(
+        onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder:(context) => DetailRecipeScreen() ));
+          },
+        child: Column(
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+              child: Image.asset(
+                image,
+              ),
             ),
-            child: Image.asset(
-              image,
-            ),
-          ),
-          GestureDetector(
-            child: Container(
+            Container(
               padding: EdgeInsets.all(kDefaultPadding / 2),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -152,6 +156,7 @@ class Recomendrecipe extends StatelessWidget {
                   ),
                 ],
               ),
+              
               child: Row(
                 children: <Widget>[
                   RichText(
@@ -179,9 +184,9 @@ class Recomendrecipe extends StatelessWidget {
                   )
                 ],
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
