@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:miniprojethm40/components/IngredientCard.dart';
 import 'package:miniprojethm40/components/RecipeImages.dart';
 import 'package:miniprojethm40/constants.dart';
+import 'package:miniprojethm40/screens/steps/Step_vocal_screen.dart';
 import 'package:video_player/video_player.dart';
 
 class DetailRecipeScreen extends StatefulWidget {
@@ -25,6 +26,7 @@ class _DetailRecipeScreenState extends State<DetailRecipeScreen> {
   }
 
   bool ingredient = true;
+  bool cheddar = true;
   int nbPeople = 2;
   void addPeople() {
     nbPeople += 1;
@@ -330,26 +332,263 @@ class _DetailRecipeScreenState extends State<DetailRecipeScreen> {
                             scrollDirection: Axis.vertical,
                             crossAxisCount: 3,
                             children: [
-                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20170607/67581_w128h128c1cx261cy261.webp", texte: "piment",),
-                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20170607/67687_w128h128c1cx350cy350.webp", texte: "sel",),
-                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20220114/127365_w128h128c1cx411cy411cxb822cyb822.webp", texte: "huile d'olive",),
-                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20170607/67563_w128h128c1cx350cy350.webp", texte: "poivre",),
-                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20170607/67727_w128h128c1cx350cy350.webp", texte: "tortilla",),
-                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20170607/67382_w128h128c1cx350cy350.webp", texte: "avocat",),
-                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20170607/67544_w128h128c1cx350cy350.webp", texte: "cheddar",),
-                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20170607/67488_w128h128c1cx350cy350.webp", texte: "oignon",),
-                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20220126/128066_w128h128c1cx1140cy1140cxb2280cyb2280.webp", texte: "oeufs",),
+                              IngredientCard(
+                                size: size,
+                                image:
+                                    "https://assets.afcdn.com/recipe/20170607/67581_w128h128c1cx261cy261.webp",
+                                texte: "piment",
+                              ),
+                              IngredientCard(
+                                size: size,
+                                image:
+                                    "https://assets.afcdn.com/recipe/20170607/67687_w128h128c1cx350cy350.webp",
+                                texte: "sel",
+                              ),
+                              IngredientCard(
+                                size: size,
+                                image:
+                                    "https://assets.afcdn.com/recipe/20220114/127365_w128h128c1cx411cy411cxb822cyb822.webp",
+                                texte: "huile d'olive",
+                              ),
+                              IngredientCard(
+                                size: size,
+                                image:
+                                    "https://assets.afcdn.com/recipe/20170607/67563_w128h128c1cx350cy350.webp",
+                                texte: "poivre",
+                              ),
+                              IngredientCard(
+                                size: size,
+                                image:
+                                    "https://assets.afcdn.com/recipe/20170607/67727_w128h128c1cx350cy350.webp",
+                                texte: " $nbPeople tortilla",
+                              ),
+                              IngredientCard(
+                                size: size,
+                                image:
+                                    "https://assets.afcdn.com/recipe/20170607/67382_w128h128c1cx350cy350.webp",
+                                texte: " ${(nbPeople ~/ 2)} avocat",
+                              ),
+                              GestureDetector(
+                                  onDoubleTap: () {
+                                    cheddar = !cheddar;
+                                    setState(() {});
+                                  },
+                                  child: cheddar
+                                      ? IngredientCard(
+                                          size: size,
+                                          image:
+                                              "https://assets.afcdn.com/recipe/20170607/67544_w128h128c1cx350cy350.webp",
+                                          texte: "${nbPeople * 25}g cheddar",
+                                        )
+                                      : IngredientCard(
+                                          size: size,
+                                          image:
+                                              "https://assets.afcdn.com/recipe/20170607/67601_w128h128c1cx350cy350.webp",
+                                          texte: "${nbPeople * 25}g emmental",
+                                        )),
+                              IngredientCard(
+                                size: size,
+                                image:
+                                    "https://assets.afcdn.com/recipe/20170607/67488_w128h128c1cx350cy350.webp",
+                                texte: "${nbPeople ~/ 2} oignons",
+                              ),
+                              IngredientCard(
+                                size: size,
+                                image:
+                                    "https://assets.afcdn.com/recipe/20220126/128066_w128h128c1cx1140cy1140cxb2280cyb2280.webp",
+                                texte: "${(nbPeople * 1.5).toInt()} oeufs",
+                              ),
                             ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 8),
+                          child: Text(
+                            "S'il vous manque des ingrédients cliquez deux fois sur l'image en question",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: kPrimaryColor),
                           ),
                         )
                       ],
                     ),
                   )
-                : Container(
-                    color: Colors.red,
-                    height: 100,
-                    width: 100,
+                : Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: GridView.count(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      crossAxisCount: 3,
+                      children: [
+                        IngredientCard(
+                          size: size,
+                          image:
+                              "https://assets.afcdn.com/recipe/20200330/109361_w320h160c1cx749cy374cxb1498cyb748.webp",
+                          texte: "1 poele",
+                        ),
+                        IngredientCard(
+                          size: size,
+                          image:
+                              "https://assets.afcdn.com/recipe/20181016/82711_w320h374c1cx641cy750cxb1283cyb1500.webp",
+                          texte: "1 bol",
+                        ),
+                        IngredientCard(
+                          size: size,
+                          image:
+                              "https://assets.afcdn.com/recipe/20170613/68878_w320h320c1cx350cy350.webp",
+                          texte: "1 fourchette",
+                        ),
+                      ],
+                    ),
+                  ),
+            Material(
+              color: Colors.white,
+              elevation: 2,
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                color: Colors.white,
+                width: size.width,
+                height: size.height / 15,
+                child: Center(
+                    child: Text(
+                  "Préparation",
+                  style: TextStyle(color: kPrimaryColor, fontSize: 20),
+                )),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey.shade300,
+              ),
+              margin: EdgeInsets.all(15),
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Temps total : "),
+                      Text(
+                        "19 min",
+                        style: TextStyle(color: Colors.grey.shade800),
+                      )
+                    ],
+                  ),
+                  Container(
+                    color: Colors.grey.shade500,
+                    height: 1,
+                    width: size.width * 0.7,
+                    margin: EdgeInsets.symmetric(vertical: 6),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Text("Préparation :"),
+                          Text(
+                            "15 min",
+                            style: TextStyle(color: Colors.grey.shade800),
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text("Repos :"),
+                          Text(
+                            " - min",
+                            style: TextStyle(color: Colors.grey.shade800),
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text("Cuisson :"),
+                          Text(
+                            "4 min",
+                            style: TextStyle(color: Colors.grey.shade800),
+                          )
+                        ],
+                      )
+                    ],
                   )
+                ],
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: ((context) => PageViewDemo())));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Material(
+                  borderRadius: BorderRadius.circular(18),
+                  elevation: 4,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                        color: Colors.white),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.soup_kitchen_outlined,
+                            color: kPrimaryColor,
+                          ),
+                          Text("   Assistant vocal",
+                              style: TextStyle(color: kPrimaryColor))
+                        ]),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children : [
+                  Container(height: 650,width: 1,color: Colors.grey,),
+                  Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+
+                    Step(
+                        number: 1,
+                        details:
+                            "Coupez l'avocat et écrasez-le à l'aide d'une\nfourchette."),
+                    Step(
+                        number: 2,
+                        details: 
+                            "Coupez l'oignon rouge en fines lamelles."),
+                    Step(
+                        number: 3,
+                        details:
+                            "Cassez les oeufs dans un bol. Salez et poivrez.\nAjoutez un peu de piments (facultatif). \nBattez le mélange."),
+                    Step(
+                        number: 4,
+                        details:
+                            "Dans un poêle, faites chauffer un peu d'huile.\nVersez les oeufs et remuez pendant\nquelques minutes jusqu'à ce que les\noeufs soient cuits."),
+                    Step(
+                        number: 5,
+                        details:
+                            "Coupez la tortilla en vous arrêtant au milieu.\nDéposez sur chaque quart une portion d'avocat,\nd'oeufs brouillés, cheddar et oignons rouge."),
+                    Step(
+                        number: 6,
+                        details:
+                            "Repliez chaque quart l'un sur l'autre dans le \nsens des aiguilles d'une montre (voir la vidéo)."),
+                    Step(
+                        number: 7,
+                        details:
+                            "Faites cuire la tortilla à la poêle avec un peu d'huile,\n environ deux minutes de chaque côté."),
+                  ],
+                ),],
+                 
+              ),
+            )
           ],
         ),
       ),
@@ -357,3 +596,36 @@ class _DetailRecipeScreenState extends State<DetailRecipeScreen> {
   }
 }
 
+class Step extends StatelessWidget {
+  const Step({
+    Key? key,
+    required this.number,
+    required this.details,
+  }) : super(key: key);
+  final int number;
+  final String details;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.only(left: 8),
+          margin: EdgeInsets.only(bottom: 30),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(
+              "ETAPE $number",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(details, style: TextStyle(color: Colors.grey.shade700))
+          ]),
+        )
+      ],
+    );
+  }
+}
