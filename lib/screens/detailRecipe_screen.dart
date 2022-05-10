@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:miniprojethm40/components/RecipeImages.dart';
+import 'package:miniprojethm40/constants.dart';
 import 'package:video_player/video_player.dart';
 
 class DetailRecipeScreen extends StatefulWidget {
@@ -22,8 +23,12 @@ class _DetailRecipeScreenState extends State<DetailRecipeScreen> {
       });
   }
 
+  bool ingredient = false;
+
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -128,7 +133,7 @@ class _DetailRecipeScreenState extends State<DetailRecipeScreen> {
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: Column(children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 10, bottom: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -136,12 +141,129 @@ class _DetailRecipeScreenState extends State<DetailRecipeScreen> {
                       RecipeImageCard(image: 'lib/assets/tortilla2.jpeg'),
                       RecipeImageCard(image: 'lib/assets/tortilla3.jpeg'),
                       RecipeImageCard(image: 'lib/assets/tortilla4.jpeg'),
-                    
                     ],
                   ),
                 )
               ]),
-            )
+            ),
+            Padding(
+              
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              child: Container(
+               
+                height: size.height / 13.5,
+                width: size.width,
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(17),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0.0, 1.0), //(x,y)
+                      blurRadius: 6.0,
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.edit_calendar),
+                        Text(" Ma semaine")
+                      ],
+                    ),
+                    Container(
+                      color: Colors.grey.shade300,
+                      width: 1.5,
+                      height: size.height / 14.5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.favorite_border,
+                          color: kPrimaryColor,
+                        ),
+                        Text(
+                          " Mon carnet",
+                          style: TextStyle(color: kPrimaryColor),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(width: size.width *0.9, height: 2,color: Colors.grey.shade300,margin: EdgeInsets.symmetric(vertical: 15),),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                Icon(Icons.timer_outlined),
+                Text("19 min"),
+                Text("•"),
+                Icon(Icons.lunch_dining_outlined),
+                Text("194kcal/portion"),
+                Text("•"),
+                Icon(Icons.paid_outlined),
+                Text("1.96€/portion"),
+              ],),
+            ),
+            Container(
+              height: size.height / 17,
+              margin: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 3, vertical: 4),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.grey.shade300),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            ingredient = true;
+                            print(ingredient);
+                          });
+                        },
+                        child: Container(
+                          child: Center(child: Text("Ingrédients",style: TextStyle(fontWeight: FontWeight.bold,  color: ingredient?kPrimaryColor:Colors.grey, fontSize: 18),)),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color:
+                                ingredient ? Colors.white : Colors.transparent,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            ingredient = false;
+                            print(ingredient);
+                          });
+                        },
+                        child: Container(
+                          child: Center(child: Text("Ustensiles", style: TextStyle(fontWeight: FontWeight.bold, color: ingredient?Colors.grey:kPrimaryColor, fontSize: 18),)),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: ingredient
+                                  ? Colors.transparent
+                                  : Colors.white),
+                        ),
+                      ),
+                    )
+                  ]),
+            ),
+            ingredient
+            ?Container(color: Colors.grey,height: 100,width: 100,)
+            :Container(color: Colors.red,height: 100,width: 100,)
           ],
         ),
       ),
