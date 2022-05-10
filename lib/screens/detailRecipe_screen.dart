@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:miniprojethm40/components/IngredientCard.dart';
 import 'package:miniprojethm40/components/RecipeImages.dart';
 import 'package:miniprojethm40/constants.dart';
 import 'package:video_player/video_player.dart';
@@ -23,7 +24,15 @@ class _DetailRecipeScreenState extends State<DetailRecipeScreen> {
       });
   }
 
-  bool ingredient = false;
+  bool ingredient = true;
+  int nbPeople = 2;
+  void addPeople() {
+    nbPeople += 1;
+  }
+
+  void removePeople() {
+    nbPeople -= 1;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -147,10 +156,8 @@ class _DetailRecipeScreenState extends State<DetailRecipeScreen> {
               ]),
             ),
             Padding(
-              
               padding: const EdgeInsets.symmetric(horizontal: 18),
               child: Container(
-               
                 height: size.height / 13.5,
                 width: size.width,
                 padding: EdgeInsets.symmetric(horizontal: 30),
@@ -197,21 +204,27 @@ class _DetailRecipeScreenState extends State<DetailRecipeScreen> {
                 ),
               ),
             ),
-            Container(width: size.width *0.9, height: 2,color: Colors.grey.shade300,margin: EdgeInsets.symmetric(vertical: 15),),
+            Container(
+              width: size.width * 0.9,
+              height: 2,
+              color: Colors.grey.shade300,
+              margin: EdgeInsets.symmetric(vertical: 15),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                Icon(Icons.timer_outlined),
-                Text("19 min"),
-                Text("•"),
-                Icon(Icons.lunch_dining_outlined),
-                Text("194kcal/portion"),
-                Text("•"),
-                Icon(Icons.paid_outlined),
-                Text("1.96€/portion"),
-              ],),
+                  Icon(Icons.timer_outlined),
+                  Text("19 min"),
+                  Text("•"),
+                  Icon(Icons.lunch_dining_outlined),
+                  Text("194kcal/portion"),
+                  Text("•"),
+                  Icon(Icons.paid_outlined),
+                  Text("1.96€/portion"),
+                ],
+              ),
             ),
             Container(
               height: size.height / 17,
@@ -232,7 +245,14 @@ class _DetailRecipeScreenState extends State<DetailRecipeScreen> {
                           });
                         },
                         child: Container(
-                          child: Center(child: Text("Ingrédients",style: TextStyle(fontWeight: FontWeight.bold,  color: ingredient?kPrimaryColor:Colors.grey, fontSize: 18),)),
+                          child: Center(
+                              child: Text(
+                            "Ingrédients",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: ingredient ? kPrimaryColor : Colors.grey,
+                                fontSize: 18),
+                          )),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color:
@@ -250,7 +270,14 @@ class _DetailRecipeScreenState extends State<DetailRecipeScreen> {
                           });
                         },
                         child: Container(
-                          child: Center(child: Text("Ustensiles", style: TextStyle(fontWeight: FontWeight.bold, color: ingredient?Colors.grey:kPrimaryColor, fontSize: 18),)),
+                          child: Center(
+                              child: Text(
+                            "Ustensiles",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: ingredient ? Colors.grey : kPrimaryColor,
+                                fontSize: 18),
+                          )),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: ingredient
@@ -262,11 +289,71 @@ class _DetailRecipeScreenState extends State<DetailRecipeScreen> {
                   ]),
             ),
             ingredient
-            ?Container(color: Colors.grey,height: 100,width: 100,)
-            :Container(color: Colors.red,height: 100,width: 100,)
+                ? Container(
+                    padding: EdgeInsets.symmetric(horizontal: 18),
+                    width: size.width,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: size.width / 2.5,
+                          height: size.height / 17,
+                          padding: EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade400,
+                              borderRadius: BorderRadius.circular(12)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                  child: Icon(Icons.remove),
+                                  onTap: () {
+                                    if (nbPeople > 1) {
+                                      removePeople();
+                                      setState(() {});
+                                    }
+                                  }),
+                              Text("$nbPeople Tortillas"),
+                              GestureDetector(
+                                  child: Icon(Icons.add),
+                                  onTap: () {
+                                    addPeople();
+                                    setState(() {});
+                                  })
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: GridView.count(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            crossAxisCount: 3,
+                            children: [
+                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20170607/67581_w128h128c1cx261cy261.webp", texte: "piment",),
+                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20170607/67687_w128h128c1cx350cy350.webp", texte: "sel",),
+                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20220114/127365_w128h128c1cx411cy411cxb822cyb822.webp", texte: "huile d'olive",),
+                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20170607/67563_w128h128c1cx350cy350.webp", texte: "poivre",),
+                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20170607/67727_w128h128c1cx350cy350.webp", texte: "tortilla",),
+                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20170607/67382_w128h128c1cx350cy350.webp", texte: "avocat",),
+                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20170607/67544_w128h128c1cx350cy350.webp", texte: "cheddar",),
+                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20170607/67488_w128h128c1cx350cy350.webp", texte: "oignon",),
+                              IngredientCard(size: size, image: "https://assets.afcdn.com/recipe/20220126/128066_w128h128c1cx1140cy1140cxb2280cyb2280.webp", texte: "oeufs",),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                : Container(
+                    color: Colors.red,
+                    height: 100,
+                    width: 100,
+                  )
           ],
         ),
       ),
     );
   }
 }
+
