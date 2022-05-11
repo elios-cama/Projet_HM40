@@ -54,7 +54,7 @@ class Step1 extends StatelessWidget {
             ),
             Text("Coupez l'avocat et écrasez-le à l'aide d'une fourchette."),
             Padding(
-              padding: const EdgeInsets.only(top: 300),
+              padding: const EdgeInsets.only(top: 100),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset(

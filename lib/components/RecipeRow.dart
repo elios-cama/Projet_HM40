@@ -101,6 +101,54 @@ class RecommandsEntre extends StatelessWidget {
     );
   }
 }
+class RecommandsRepas extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: <Widget>[
+          Recomendrecipe(
+            image: "lib/assets/diner.jpeg",
+            title: "Jardiere",
+            note: "4.6/5",
+            avis: "10000 avis",
+          ),
+          Recomendrecipe(
+            image: "lib/assets/diner.jpeg",
+            title: "Jardiere",
+            note: "4.6/5",
+            avis: "10000 avis",
+          ),
+          Recomendrecipe(
+            image: "lib/assets/diner.jpeg",
+            title: "Jardiere",
+            note: "4.6/5",
+            avis: "10000 avis",
+          ),
+          Recomendrecipe(
+            image: "lib/assets/diner.jpeg",
+            title: "Jardiere",
+            note: "4.6/5",
+            avis: "10000 avis",
+          ),
+          Recomendrecipe(
+            image: "lib/assets/diner.jpeg",
+            title: "Jardiere",
+            note: "4.6/5",
+            avis: "10000 avis",
+          ),
+          Recomendrecipe(
+            image: "lib/assets/diner.jpeg",
+            title: "Jardiere",
+            note: "4.6/5",
+            avis: "10000 avis",
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 class Recomendrecipe extends StatelessWidget {
   final String image, title, note, avis;

@@ -43,6 +43,13 @@ class _RecipeScreenState extends State<RecipeScreen> {
             padding: const EdgeInsets.only(
               top: 10, left: 20, 
             ),
+            child: Text('Idée de dîner', style:GoogleFonts.lato(fontWeight: FontWeight.bold),),
+          ),
+          RecommandsRepas(),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 10, left: 20, 
+            ),
             child: Text('Idée de dessert', style:GoogleFonts.lato(fontWeight: FontWeight.bold),),
           ),
           RecomendsPlants(),

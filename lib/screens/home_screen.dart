@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBarHome(),
       body: pages[pageIndex],
+      
       bottomNavigationBar: CustomAppBar(context),
     );
   }
