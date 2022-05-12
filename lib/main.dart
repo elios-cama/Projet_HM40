@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:miniprojethm40/screens/home_screen.dart';
+import 'package:miniprojethm40/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,15 +13,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(color: Colors.white, elevation: 0),
-        backgroundColor: Colors.white,
-        primarySwatch: Colors.red,
-      ),
-      home:  HomePage(),
+    return ChangeNotifierProvider(
+      create: ((context) => ThemeProvider()),
+      builder: (context, _){
+        final themeProvider = Provider.of<ThemeProvider>(context);
+      
+      return  MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        themeMode: themeProvider.thememode,
+        theme: MyThemes.lightTheme,
+        darkTheme : MyThemes.darkTheme,
+        home:  HomePage(),
+      );
+      },
+      
     );
   }
 }

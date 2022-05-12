@@ -2,12 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:miniprojethm40/components/appBarHome.dart';
+import 'package:miniprojethm40/main.dart';
 import 'package:miniprojethm40/screens/FridgeScreen.dart';
 import 'package:miniprojethm40/screens/RecipeScreen.dart';
 import 'package:miniprojethm40/constants.dart';
 import 'package:miniprojethm40/constants.dart';
 import 'package:miniprojethm40/screens/SearchScreen.dart';
 import 'package:miniprojethm40/screens/weekScreen.dart';
+import 'package:miniprojethm40/theme_provider.dart';
+import 'package:provider/provider.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,12 +21,42 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool darkMode = false;
   int pageIndex = 0;
   List pages = [RecipeScreen(), WeekScreen(), SearchScreen(), FridgeScreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarHome(),
+      appBar: AppBar(
+      elevation: 0,
+      centerTitle: true,
+      leading: ChangeThemeIconWidget(),
+      title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.soup_kitchen_outlined,
+              color: primaryRedColor,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              "CUISINOMAX",
+              style: TextStyle(color: primaryRedColor),
+            )
+          ]),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 5),
+          child: Icon(
+            Icons.person,
+            color: primaryRedColor,
+          ),
+        )
+      ],
+    ),
       body: pages[pageIndex],
       
       bottomNavigationBar: CustomAppBar(context),
@@ -121,5 +155,20 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+}
+
+class ChangeThemeIconWidget extends StatelessWidget {
+  const ChangeThemeIconWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    return Switch.adaptive(value: themeProvider.isDarkMode, onChanged: (value){
+      final provider = Provider.of<ThemeProvider>(context, listen: false);
+      provider.toggleTheme(value);
+    });
   }
 }

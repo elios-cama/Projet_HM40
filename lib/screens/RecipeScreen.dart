@@ -9,7 +9,8 @@ import 'package:miniprojethm40/constants.dart';
 import 'package:miniprojethm40/size_config.dart';
 
 class RecipeScreen extends StatefulWidget {
-  const RecipeScreen({ Key? key }) : super(key: key);
+  const RecipeScreen({ Key? key, }) : super(key: key);
+  
 
   @override
   State<RecipeScreen> createState() => _RecipeScreenState();
