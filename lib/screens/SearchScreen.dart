@@ -59,6 +59,8 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             RangeSlider(
+              inactiveColor: Colors.red,
+              activeColor: kPrimaryColor,
               min: 0.0,
               max: 120.0,
               divisions: 10,
@@ -87,6 +89,8 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             Slider(
+              inactiveColor: Colors.red,
+              activeColor: kPrimaryColor,
               min: 1.0,
               max: 50.0,
               value: _price,
@@ -111,6 +115,8 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             Slider(
+              inactiveColor: Colors.red,
+              activeColor: kPrimaryColor,
               min: 1,
               max: 5,
               value: _difficulte,
@@ -136,6 +142,8 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
 
             Slider(
+              inactiveColor: Colors.red,
+              activeColor: kPrimaryColor,
               min: 10,
               max: 1000,
               value: _calories,

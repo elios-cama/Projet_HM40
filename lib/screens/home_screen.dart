@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
     return Container(
       height: 60,
       decoration: BoxDecoration(
-        color: Colors.white,
+        
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
@@ -166,7 +166,7 @@ class ChangeThemeIconWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    return Switch.adaptive(value: themeProvider.isDarkMode, onChanged: (value){
+    return Switch.adaptive(value: themeProvider.isDarkMode,activeColor: kPrimaryColor, inactiveTrackColor: kPrimaryColor, onChanged: (value){
       final provider = Provider.of<ThemeProvider>(context, listen: false);
       provider.toggleTheme(value);
     });

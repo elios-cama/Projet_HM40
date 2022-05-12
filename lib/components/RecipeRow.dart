@@ -212,7 +212,8 @@ class Recomendrecipe extends StatelessWidget {
                       children: [
                         TextSpan(
                             text: "$title\n".toUpperCase(),
-                            style: Theme.of(context).textTheme.button),
+                            style: TextStyle(color: Colors.grey.shade900)
+                           ),
                         TextSpan(
                           text: "$avis",
                           style: TextStyle(

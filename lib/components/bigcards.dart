@@ -65,7 +65,7 @@ class RecommandBigCard extends StatelessWidget {
                       children: [
                         TextSpan(
                             text: "$title\n".toUpperCase(),
-                            style: Theme.of(context).textTheme.button),
+                            style: TextStyle(color: Colors.black)),
                         TextSpan(
                           text: "$avis",
                           style: TextStyle(
