@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:miniprojethm40/components/IngredientCard.dart';
 import 'package:miniprojethm40/components/RecipeImages.dart';
@@ -65,6 +67,7 @@ class _DetailRecipeScreenState extends State<DetailRecipeScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
@@ -519,7 +522,8 @@ class _DetailRecipeScreenState extends State<DetailRecipeScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: ((context) => PageViewDemo())));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => PageViewDemo())));
               },
               child: Padding(
                 padding: const EdgeInsets.all(20),
@@ -550,47 +554,167 @@ class _DetailRecipeScreenState extends State<DetailRecipeScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
-                children : [
-                  Container(height: 650,width: 1,color: Colors.grey,),
+                children: [
+                  Container(
+                    height: 650,
+                    width: 1,
+                    color: Colors.grey,
+                  ),
                   Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-
-                    Step(
-                        number: 1,
-                        details:
-                            "Coupez l'avocat et écrasez-le à l'aide d'une\nfourchette."),
-                    Step(
-                        number: 2,
-                        details: 
-                            "Coupez l'oignon rouge en fines lamelles."),
-                    Step(
-                        number: 3,
-                        details:
-                            "Cassez les oeufs dans un bol. Salez et poivrez.\nAjoutez un peu de piments (facultatif). \nBattez le mélange."),
-                    Step(
-                        number: 4,
-                        details:
-                            "Dans un poêle, faites chauffer un peu d'huile.\nVersez les oeufs et remuez pendant\nquelques minutes jusqu'à ce que les\noeufs soient cuits."),
-                    Step(
-                        number: 5,
-                        details:
-                            "Coupez la tortilla en vous arrêtant au milieu.\nDéposez sur chaque quart une portion d'avocat,\nd'oeufs brouillés, cheddar et oignons rouge."),
-                    Step(
-                        number: 6,
-                        details:
-                            "Repliez chaque quart l'un sur l'autre dans le \nsens des aiguilles d'une montre (voir la vidéo)."),
-                    Step(
-                        number: 7,
-                        details:
-                            "Faites cuire la tortilla à la poêle avec un peu d'huile,\n environ deux minutes de chaque côté."),
-                  ],
-                ),],
-                 
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Step(
+                          number: 1,
+                          details:
+                              "Coupez l'avocat et écrasez-le à l'aide d'une\nfourchette."),
+                      Step(
+                          number: 2,
+                          details: "Coupez l'oignon rouge en fines lamelles."),
+                      Step(
+                          number: 3,
+                          details:
+                              "Cassez les oeufs dans un bol. Salez et poivrez.\nAjoutez un peu de piments (facultatif). \nBattez le mélange."),
+                      Step(
+                          number: 4,
+                          details:
+                              "Dans un poêle, faites chauffer un peu d'huile.\nVersez les oeufs et remuez pendant\nquelques minutes jusqu'à ce que les\noeufs soient cuits."),
+                      Step(
+                          number: 5,
+                          details:
+                              "Coupez la tortilla en vous arrêtant au milieu.\nDéposez sur chaque quart une portion d'avocat,\nd'oeufs brouillés, cheddar et oignons rouge."),
+                      Step(
+                          number: 6,
+                          details:
+                              "Repliez chaque quart l'un sur l'autre dans le \nsens des aiguilles d'une montre (voir la vidéo)."),
+                      Step(
+                          number: 7,
+                          details:
+                              "Faites cuire la tortilla à la poêle avec un peu d'huile,\n environ deux minutes de chaque côté."),
+                    ],
+                  ),
+                ],
               ),
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                'Commentaires (2)',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            Column(children: [
+              Commentaires_widget(),
+              Commentaires_widget(),
+              Commentaires_widget(),
+              Commentaires_widget(),
+              Commentaires_widget(),
+              Commentaires_widget(),
+            ],)
+            
           ],
         ),
+      ),
+    );
+  }
+}
+
+class Commentaires_widget extends StatelessWidget {
+  const Commentaires_widget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(20),
+      child: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                      radius: 30,
+                      backgroundColor: primaryRedColor,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 28,
+                        child: Text(
+                          "C",
+                          style: TextStyle(
+                              color: kPrimaryColor, fontSize: 30),
+                        ),
+                      )),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(" cuisinierdu90"),
+                      Row(
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.star,
+                                color: Color(0xFFFF6F61),
+                                size: 20,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Color(0xFFFF6F61),
+                                size: 20,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Color(0xFFFF6F61),
+                                size: 20,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Color(0xFFFF6F61),
+                                size: 20,
+                              ),
+                              Icon(
+                                Icons.star_outline,
+                                color: Color(0xFFFF6F61),
+                                size: 20,
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8),
+                            child: Text(
+                              "4,1/5",
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 14),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                  
+                ],
+              ),
+              Icon(
+                    Icons.thumb_up_alt_outlined,
+                    color: Colors.grey,
+                  )
+            ],
+          ),
+          SizedBox(height: 10,),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+            Text("27/09/2021 à 16:01", style: TextStyle(color: Colors.grey, fontSize: 12),),
+            Text("Super bon, rien à ajouter, parfait pour petits et grands", )
+          ]
+          ),
+        ],
       ),
     );
   }

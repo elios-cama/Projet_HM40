@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:miniprojethm40/components/IngredientCard.dart';
+import 'package:miniprojethm40/components/RecipeRow.dart';
 import 'package:miniprojethm40/constants.dart';
 
 class FridgeScreen extends StatelessWidget {
@@ -125,6 +128,31 @@ class FridgeScreen extends StatelessWidget {
               ],
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical : 10.0),
+            child: Text("Suggestions de plats", style: TextStyle(fontWeight : FontWeight.bold),),
+            
+          ),
+          SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: <Widget>[
+          Recomendrecipe(
+            image: "lib/assets/harictos.jpeg",
+            title: "Haricots",
+            note: "4.6/5",
+            avis: "10000 avis",
+          ),
+          Recomendrecipe(
+            image: "lib/assets/blanquette.jpeg",
+            title: "Dinde",
+            note: "4.6/5",
+            avis: "10000 avis",
+          ),
+          
+        ],
+      ),
+    ),
         ]),
       ),
     );
